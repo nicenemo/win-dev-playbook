@@ -35,5 +35,3 @@ Check with:
 which ansible
 ```
 
-
-
