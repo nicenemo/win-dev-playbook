@@ -33,7 +33,6 @@ export LESSHISTFILE="-"
 export WGETRC="${HOME}/.config/wget/wgetrc"
 export INPUTRC="${HOME}/.config/inputrc"
 export ZDOTDIR="${HOME}/.config/zsh"
-export ANSIBLE_CONFIG="${HOME}/.config/ansible/ansible.cfg"
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export VAGRANT_DEFAULT_PROVIDER="virtualbox"
 export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/c/vagrant"
@@ -80,11 +79,14 @@ alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias grep='grep --color=auto'
 alias fd=fdfind
+#alias -s {yml,yaml}=ansible-playbook
 export MOLECULE_DISTRO=debian10
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
 export GOPATH=~/.local/share/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:/usr/share/logstash/bin
+export LS_HOME=/usr/share/logstash
 
 # Keybindings for substring search plugin. Maps up and down arrows.
 bindkey -M main '^[OA' history-substring-search-up
@@ -125,6 +127,7 @@ export HISTTIMEFORMAT="[%F %T] "
 setopt EXTENDED_HISTORY
 DIRSTACKSIZE=${DIRSTACKSIZE:-20}
 dirstack_file=${dirstack_file:-${HOME}/.local/share/zsh/zdirs}
+export GPG_TTY=$(tty)
 
 # Use modern completion system
 autoload -Uz compinit
