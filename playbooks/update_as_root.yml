@@ -50,6 +50,9 @@
   - name: Add Kubernetes apt key.
     apt_key:
       url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  - name: Add Helm apt key.
+    apt_key:
+      url: https://baltocdn.com/helm/signing.asc
   - name: Install Elastic repo.
     apt_repository:
       repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
@@ -66,6 +69,10 @@
   - name: Install Kubernetes repo.
     apt_repository:
       repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+      update-cache: yes
+  - name: Install Helm  repo.
+    apt_repository:
+      repo: "deb https://baltocdn.com/helm/stable/debian/ all main"
       update-cache: yes
   - name: Install  Software with apt.
     apt:
@@ -107,6 +114,7 @@
       - pandoc
       - mosquitto-clients
       - kubectl
+      - helm
   - name: Uninstall packages
     apt:
       name:
