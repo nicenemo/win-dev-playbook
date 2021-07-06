@@ -44,6 +44,9 @@
     apt_key:
       url: https://assets.azul.com/files/0xB1998361219BD9C9.txt
       id: "0xB1998361219BD9C9"
+  - name: Import Hashicorp key
+    apt_key: 
+      url: https://apt.releases.hashicorp.com/gpg
   - name: Import Mosquitto MQTT APT key.
     apt_key:
       url: http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
@@ -74,47 +77,62 @@
     apt_repository:
       repo: "deb https://baltocdn.com/helm/stable/debian/ all main"
       update-cache: yes
+  - name: Install Hashicorp repository
+    apt_repository:
+      repo: "deb [arch=amd64] https://apt.releases.hashicorp.com buster main"
   - name: Install  Software with apt.
     apt:
       name:
-      - rsync
-      - ssh
-      - git
-      - universal-ctags
-      - cscope
-      - neovim
-      - tmux
-      - curl
-      - jq
-      - wget
-      - sed
-      - nmap
-      - net-tools
-      - telnet
-      - htop
-      - p7zip-full
+      - apt-get
       - aptitude
-      - rake
-      - tree
+      - autoconf
+      - automake
+      - bind9-utils
+      - cargo
+      - cmake
+      - cscope
+      - curl
       - fd-find
       - fzf
-      - ripgrep
-      - groff
-      - vifm
-      - zsh
-      - man
-      - openjdk-11-jdk-headless
-      - maven
-      - yarn
-      - logstash
-      - fd-find
+      - g++
+      - gettext
+      - git
       - golang
-      - cargo
-      - texlive-full
-      - pandoc
-      - mosquitto-clients
-      - kubectl
+      - groff
       - helm
+      - htop
+      - install
+      - jq
+      - kubectl
+      - libtool
+      - libtool-bin
+      - logstash
+      - man
+      - maven
+      - mosquitto-clients
+      - neovim
+      - net-tools
+      - ninja-build
+      - nmap
+      - openjdk-11-jdk-headless
+      - p7zip-full
+      - pandoc
+      - pkg-config
+      - rake
+      - ripgrep
+      - rsync
+      - sed
+      - ssh
+      - telnet
+      - texlive-full
+      - tmux
+      - tree
+      - universal-ctags
+      - unzip
+      - vifm
+      - wget
+      - yarn
+      - zsh
   - name: Uninstall packages
     apt:
       name:
