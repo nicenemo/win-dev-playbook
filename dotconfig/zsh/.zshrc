@@ -36,7 +36,7 @@ export ZDOTDIR="${HOME}/.config/zsh"
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export VAGRANT_DEFAULT_PROVIDER="virtualbox"
 export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/c/vagrant"
-
+MAVEN_OPTS="-Ddependency-check.skip=true -Xshare:on -XX:TieredStopAtLevel=1 -XX:+UseParallelGC -Xverify:none -Dmaven.artifact.threads=25 -Dhttp.tcp.nodelay=false -Dmaven.wagon.provider.http=httpclient -Xmx2048M -Xss256M -XX:+CMSClassUnloadingEnabled -XX:-UseGCOverheadLimit"
 # Load plugins
 export ZPLUG_HOME=~/.local/share/zsh/zplug
 source $ZPLUG_HOME/init.zsh
@@ -80,6 +80,15 @@ alias l='ls --color=auto'
 alias grep='grep --color=auto'
 alias fd=fdfind
 #alias -s {yml,yaml}=ansible-playbook
+m2c='mvn -T 2C'
+mci='mvn clean install'
+mcp='mvn clean package'
+mi2c='mvn -T 2C clean install'
+mit8='mvn -T 8 clean install'
+mjdoc='mvn javadoc:javadoc'
+mp2c='mvn -T 2C clean package'
+mpt8='mvn -T 8 clean package'
+mt8='mvn -T 8'
 export MOLECULE_DISTRO=debian10
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
 export GOPATH=~/.local/share/go
