@@ -45,7 +45,7 @@
       url: https://assets.azul.com/files/0xB1998361219BD9C9.txt
       id: "0xB1998361219BD9C9"
   - name: Import Hashicorp key
-    apt_key: 
+    apt_key:
       url: https://apt.releases.hashicorp.com/gpg
   - name: Import Mosquitto MQTT APT key.
     apt_key:
@@ -83,7 +83,6 @@
   - name: Install  Software with apt.
     apt:
       name:
-      - apt-get
       - aptitude
       - autoconf
       - automake
@@ -92,6 +91,11 @@
       - cmake
       - cscope
       - curl
+      - doxygen
+      - doxygen-doc
+      - doxygen-gui
+      - doxygen-latex
+      - graphviz
       - fd-find
       - fzf
       - g++
@@ -101,7 +105,6 @@
       - groff
       - helm
       - htop
-      - install
       - jq
       - kubectl
       - libtool

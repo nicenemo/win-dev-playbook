@@ -1,5 +1,7 @@
 /home/kruse/Projects/personal/win-dev-playbook
 /home/kruse/Projects/personal
+/home/kruse/Projects/personal/neovim
+/home/kruse/Projects/personal/win-dev-playbook/neovim
 /home/kruse
 /home/kruse/Projects/ReadID/libs/innovalor-logging-logger
 /home/kruse/Projects/ReadID/server/iddocserver
@@ -15,5 +17,3 @@
 /home/kruse/kibana_backup_dir
 /home/kruse/kibana_backup_dir/spaces
 /home/kruse/qmk_firmware/.build
-/home/kruse/Projects/ReadID/server/iddocserver/iddocserver_storage_service
-/home/kruse/Projects/ReadID/server/iddocserver-distribution
