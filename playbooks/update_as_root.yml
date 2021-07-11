@@ -136,7 +136,9 @@
       - llvm-runtime 
       - logstash
       - luajit
+      - luaterm
       - luarocks
+      - lua-system
       - man
       - maven
       - mosquitto-clients
