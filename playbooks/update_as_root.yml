@@ -84,7 +84,7 @@
     apt:
       name:
       - aptitude
-      - autoconf
+      - autoconf 
       - automake
       - bat
       - bind9-utils
@@ -96,7 +96,7 @@
       - clang-tidy 
       - clang-tools 
       - clangd 
-      - cmake
+      - cmake 
       - cscope
       - curl
       - doxygen
@@ -123,14 +123,17 @@
       - libc++abi1 
       - libclang-dev 
       - libclang1 
+      - libffi-dev
       - libjs-mathjax-doc
       - liblldb-dev
       - libllvm-ocaml-dev 
       - libmsgpackc2 
+      - libncurses5-dev 
       - libomp-11-doc
       - libtermkey1 
       - libtool
       - libtool-bin
+      - libunibilium-dev 
       - libunibilium4 
       - libvterm0 
       - lldb 
@@ -153,20 +156,24 @@
       - net-tools
       - ninja-build
       - nmap
+      - nodejs
+      - npm
       - openjdk-11-jdk-headless
       - p7zip-full
       - pandoc
       - pkg-config
-      - python-clang
-      - python-pygments-doc 
+      - python3
       - python3-greenlet 
       - python3-msgpack 
       - python3-neovim
+      - python3-pip
+      - python3-pip 
       - python3-pynvim 
       - rake
       - ripgrep
       - rsync
       - sed
+      - software-properties-common 
       - ssh
       - telnet
       - texlive-full
@@ -187,11 +194,6 @@
       - vim
       # - neovim # I install neovim from source now 
       state: absent
-  - name: NodeJS
-    apt:
-      name:
-      - nodejs
-      - npm
   - name: Global install npm editorconfig package.
     npm:
       name: editorconfig
@@ -204,9 +206,3 @@
     npm:
       name: neovim
       global: yes
-  - name: 'Install Python 3 and pip 3.'
-    apt:
-      name:
-      - python3
-      - python3-pip
-      - libffi-dev
