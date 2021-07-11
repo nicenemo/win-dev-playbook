@@ -135,10 +135,12 @@
       - llvm-dev 
       - llvm-runtime 
       - logstash
-      - luajit
-      - luaterm
-      - luarocks
+      - lua-cliargs      
+      - lua-mediator
       - lua-system
+      - lua-term
+      - luajit
+      - luarocks
       - man
       - maven
       - mosquitto-clients
