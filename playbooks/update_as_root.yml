@@ -86,8 +86,16 @@
       - aptitude
       - autoconf
       - automake
+      - bat
       - bind9-utils
       - cargo
+      - clang 
+      - clang-11
+      - clang-11-doc 
+      - clang-format 
+      - clang-tidy 
+      - clang-tools 
+      - clangd 
       - cmake
       - cscope
       - curl
@@ -95,24 +103,44 @@
       - doxygen-doc
       - doxygen-gui
       - doxygen-latex
-      - graphviz
       - fd-find
+      - fonts-mathjax-extras 
       - fzf
       - g++
       - gettext
       - git
       - golang
+      - gperf
+      - graphviz
       - groff
       - helm
       - htop
       - jq
       - kubectl
+      - libc++-dev 
+      - libc++1 
+      - libc++abi-dev 
+      - libc++abi1 
+      - libclang-dev 
+      - libclang1 
+      - libjs-mathjax-doc
+      - liblldb-dev
+      - libllvm-ocaml-dev 
+      - libomp-11-doc
       - libtool
       - libtool-bin
+      - lldb 
+      - llvm 
+      - llvm-11-doc
+      - llvm-dev 
+      - llvm-runtime 
       - logstash
+      - luajit
+      - luarocks
       - man
       - maven
       - mosquitto-clients
+      - ncurses-doc 
       - neovim
       - net-tools
       - ninja-build
@@ -121,6 +149,8 @@
       - p7zip-full
       - pandoc
       - pkg-config
+      - python-clang
+      - python-pygments-doc 
       - rake
       - ripgrep
       - rsync
@@ -129,7 +159,9 @@
       - telnet
       - texlive-full
       - tmux
+      - traceroute
       - tree
+      - ttf-bitstream-vera
       - universal-ctags
       - unzip
       - vifm
