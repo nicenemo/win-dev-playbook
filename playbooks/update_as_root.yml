@@ -126,9 +126,13 @@
       - libjs-mathjax-doc
       - liblldb-dev
       - libllvm-ocaml-dev 
+      - libmsgpackc2 
       - libomp-11-doc
+      - libtermkey1 
       - libtool
       - libtool-bin
+      - libunibilium4 
+      - libvterm0 
       - lldb 
       - llvm 
       - llvm-11-doc
@@ -136,6 +140,7 @@
       - llvm-runtime 
       - logstash
       - lua-cliargs      
+      - lua-luv
       - lua-mediator
       - lua-system
       - lua-term
@@ -145,7 +150,6 @@
       - maven
       - mosquitto-clients
       - ncurses-doc 
-      - neovim
       - net-tools
       - ninja-build
       - nmap
@@ -155,6 +159,10 @@
       - pkg-config
       - python-clang
       - python-pygments-doc 
+      - python3-greenlet 
+      - python3-msgpack 
+      - python3-neovim
+      - python3-pynvim 
       - rake
       - ripgrep
       - rsync
@@ -170,12 +178,14 @@
       - unzip
       - vifm
       - wget
+      - xclip
       - yarn
       - zsh
   - name: Uninstall packages
     apt:
       name:
       - vim
+      # - neovim # I install neovim from source now 
       state: absent
   - name: NodeJS
     apt:
