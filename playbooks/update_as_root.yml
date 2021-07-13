@@ -206,3 +206,11 @@
     npm:
       name: neovim
       global: yes
+  - name: Install Ruby bundler.
+    gem:
+      name: bundler
+      state: latest
+  - name: Install Ruby rake.
+    gem:
+      name: rake
+      state: latest
