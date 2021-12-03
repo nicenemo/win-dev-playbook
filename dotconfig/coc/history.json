@@ -1,0 +1,20 @@
+{
+  "extensions": {
+    "%2Fhome%2Fkruse%2FProjects%2Fpersonal%2Fwin-dev-playbook": [
+      "file"
+    ]
+  },
+  "commands": {
+    "%2Fhome%2Fkruse%2FProjects%2Fpersonal%2Fwin-dev-playbook": [
+      ":q"
+    ],
+    "%2Fhome%2Fkruse": [
+      "hosts"
+    ]
+  },
+  "symbols": {
+    "%2Fhome%2Fkruse%2FProjects%2FReadID%2Fserverconfiguration%2Fansible%2Fnew_infrastructure": [
+      "ls"
+    ]
+  }
+}

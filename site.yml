@@ -1,0 +1,5 @@
+#!ansible-playbook
+---
+- import_playbook: playbooks/update_as_root.yml
+- import_playbook: playbooks/mvn.yml
+ #- import_playbook: playbooks/update_as_self.yml

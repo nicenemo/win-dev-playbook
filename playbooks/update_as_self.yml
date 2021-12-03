@@ -1,0 +1,69 @@
+#!ansible-playbook
+---
+- name: Things to install and configure mainly as myself.
+  hosts: wsl
+  become: false
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  tasks:
+  - name: Install or update required python packages
+    pip:
+      name:
+      - pip
+      - ansible
+      - yamllint
+      - ansible-lint
+      - setuptools
+      - molecule
+      - 'molecule[docker]'
+      - qmk
+      - docker-compose
+      - flake8
+      - autoflake
+      - isort
+      - coverage
+      - pynvim
+      - nvr
+      - neovim-remote
+      - jmespath
+      state: latest
+  - name: Create ~/.cache/zsh directory
+    file:
+      path: /home/kruse/.cache/zsh
+      state: directory
+      mode: '0700'
+  - name: change user shell to zsh 
+    become: yes
+    user:
+      name: "{{ the_user }}"
+      shell: /usr/bin/zsh
+  - name: Create ~/.local/share/nvim/shada
+    file:
+      path: /home/kruse/.local/share/nvim/shada
+      state: directory
+      mode: '0700'
+  - name: Create ~/.local/share/nvim/tmp
+    file:
+      path: /home/kruse/.local/share/nvim/tmp
+      state: directory
+      mode: '0700'
+  - name: Create ~/.local/share/nvim/tmp/swap
+    file:
+      path: /home/kruse/.local/share/nvim/tmp/swap
+      state: directory
+      mode: '0700'
+  - name: Create ~/.local/share/nvim/tmp/view
+    file:
+      path: /home/kruse/.local/share/nvim/tmp/view
+      state: directory
+      mode: '0700'
+  - name: Create ~/.local/share/nvim/tmp/undo
+    file:
+      path: /home/kruse/.local/share/nvim/tmp/undo
+      state: directory
+      mode: '0700'
+  - name: Create ~/.local/share/zsh
+    file:
+      path: /home/kruse/.local/share/zsh
+      state: directory
+      mode: '0700'

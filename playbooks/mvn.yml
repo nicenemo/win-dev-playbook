@@ -1,0 +1,48 @@
+#! ansible-playbook
+---
+- name: Configure windows development environment from WSL 2.
+  hosts: wsl
+  become: true
+  vars_files:
+    ../vars/vars.yml
+  tasks:
+  # with minor changes from: https://github.com/avinash6784/ansible-maven/blob/master/tasks/main.yml
+  - name: Check If maven is already installed or not
+    shell: "mvn -version | grep -w 'Apache Maven' | awk '{print $3}'"
+    register: maven_installed
+    changed_when: false
+
+  - name: Installed maven version
+    debug: "msg={{maven_installed.stdout}}"
+
+  - block:
+    - name: Download and Unarchive maven
+      unarchive:
+        src: "http://www.apache.org/dist/maven/maven-{{ maven_major }}/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
+        dest: "{{maven_home_parent_directory}}"
+        copy: no
+
+    - name: Create maven symlink to /usr/bin
+      file:
+        src: "{{maven_home_parent_directory}}/apache-maven-{{maven_version}}/bin/mvn"
+        dest: /usr/bin/mvn
+        state: link
+
+    - name: Configure maven and its environment variables
+      lineinfile:
+        dest: "{{maven_env_file}}"
+        line: "{{ item.line }}"
+        create: yes
+        state: present
+      with_items:
+        - { line: '#!/bin/bash' }
+        - { line: 'M2_HOME={{maven_home_parent_directory}}/apache-maven-{{maven_version}}' }
+        - { line: 'PATH=$PATH:$M2_HOME/bin' }
+        # from: https://medium.com/@john_freeman/faster-maven-builds-with-maven-opts-822cdc82fa85
+        - { line: 'MAVEN_OPTS="-Xms3500m -Xmx3500m -Xshare:on -XX:TieredStopAtLevel=1 -XX:+UseParallelGC -Xverify:none -Dmaven.artifact.threads=50"' }
+   
+    - name: Exports/Run maven env file for make M2_HOME available globally
+      # Assumes that /bin/sh shell exists or is symlinked. Using source instead of dot (.) does not work with dash
+      shell: ". {{maven_env_file}}"
+
+    when: maven_installed.stdout == ""

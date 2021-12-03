@@ -1,0 +1,226 @@
+#!ansible-playbook
+---
+- name: Configure windows development environment from WSL 2.
+  hosts: wsl
+  become: true
+  vars_files:
+    ../vars/vars.yml
+  tasks:
+  - name: Use Dutch Debian mirrors.
+    replace:
+      path: /etc/apt/sources.list
+      regexp: 'deb\.'
+      replace: 'ftp.nl.'
+  - name: Update apt-get repo and cache
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  - name: Upgrade all apt packages
+    apt: upgrade=dist force_apt_get=yes
+  - name: Autoremove packages no longer needed.
+    apt: autoremove=yes
+  - name: Autoclean temporary package data.
+    apt: autoclean=yes
+  - name: Check if a reboot is needed for Debian and Ubuntu boxes
+    stat: path=/var/run/reboot-required get_md5=no
+    register: reboot_required_file
+  - name: Reboot the Debian or Ubuntu server
+    reboot:
+      msg: "Reboot initiated by Ansible due to kernel updates"
+      connect_timeout: 5
+      reboot_timeout: 300
+      pre_reboot_delay: 0
+      post_reboot_delay: 30
+      test_command: uptime
+    when: reboot_required_file.stat.exists
+  - name: Import Elastic APT key.
+    apt_key:
+      url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  - name: Import YARN APT key.
+    apt_key:
+      url: https://dl.yarnpkg.com/debian/pubkey.gpg
+  - name: Import Azul APT key.
+    apt_key:
+      url: https://assets.azul.com/files/0xB1998361219BD9C9.txt
+      id: "0xB1998361219BD9C9"
+  - name: Import Hashicorp key
+    apt_key:
+      url: https://apt.releases.hashicorp.com/gpg
+  - name: Import Mosquitto MQTT APT key.
+    apt_key:
+      url: http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
+  - name: Add Kubernetes apt key.
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  - name: Add Helm apt key.
+    apt_key:
+      url: https://baltocdn.com/helm/signing.asc
+  - name: Import Docker APT key.
+    apt_key:
+      url: https://download.docker.com/linux/debian/gpg
+  - name: Add official Docker repo.
+    apt_repository:
+      repo: 'deb https://download.docker.com/linux/debian bullseye stable'
+  - name: Install Elastic repo.
+    apt_repository:
+      repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+      update_cache: yes
+  - name: Install YARN APT repo.
+    apt_repository:
+      repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+      filename: "yarn"
+      update_cache: yes
+  - name: Install Mosquitto MQTT repo.
+    apt_repository:
+      repo: "deb http://repo.mosquitto.org/debian/ buster main"
+      update-cache: yes
+  - name: Install Kubernetes repo.
+    apt_repository:
+      repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+      update-cache: yes
+  - name: Install Helm  repo.
+    apt_repository:
+      repo: "deb https://baltocdn.com/helm/stable/debian/ all main"
+      update-cache: yes
+  - name: Install Hashicorp repository
+    apt_repository:
+      repo: "deb [arch=amd64] https://apt.releases.hashicorp.com buster main"
+  - name: Install  Software with apt.
+    apt:
+      name:
+      - aptitude
+      - autoconf 
+      - automake
+      - bat
+      - bind9-utils
+      - cargo
+      - clang 
+      - clang-11
+      - clang-11-doc 
+      - clang-format 
+      - clang-tidy 
+      - clang-tools 
+      - clangd 
+      - cmake 
+      - cscope
+      - curl
+      - dash
+      - doxygen
+      - doxygen-doc
+      - doxygen-gui
+      - doxygen-latex
+      - fd-find
+      - fonts-mathjax-extras 
+      - fzf
+      - g++
+      - gettext
+      - git
+      - golang
+      - gperf
+      - graphviz
+      - groff
+      - helm
+      - htop
+      - jq
+      - kubectl
+      - libc++-dev 
+      - libc++1 
+      - libc++abi-dev 
+      - libc++abi1 
+      - libclang-dev 
+      - libclang1 
+      - libffi-dev
+      - libjs-mathjax-doc
+      - liblldb-dev
+      - libllvm-ocaml-dev 
+      - libmsgpackc2 
+      - libncurses5-dev 
+      - libomp-11-doc
+      - libtermkey1 
+      - libtool
+      - libtool-bin
+      - libunibilium-dev 
+      - libunibilium4 
+      - libvterm0 
+      - lldb 
+      - llvm 
+      - llvm-11-doc
+      - llvm-dev 
+      - llvm-runtime 
+      - logstash
+      - lua-cliargs      
+      - lua-luv
+      - lua-mediator
+      - lua-system
+      - lua-term
+      - luajit
+      - luarocks
+      - man
+      - mosquitto-clients
+      - ncurses-doc 
+      - nodejs
+      - net-tools
+      - ninja-build
+      - nmap
+      - openjdk-11-jdk-headless
+      - p7zip-full
+      - pandoc
+      - pkg-config
+      - python3
+      - python3-greenlet 
+      - python3-msgpack 
+      - python3-neovim
+      - python3-pip 
+      - python3-pynvim 
+      - rake
+      - ripgrep
+      - rsync
+      - sed
+      - software-properties-common 
+      - ssh
+      - telnet
+      - texlive-full
+      - tmux
+      - traceroute
+      - tree
+      - ttf-bitstream-vera
+      - universal-ctags
+      - unzip
+      - vifm
+      - wget
+      - xclip
+      - yarn
+      - zsh
+  - name: Uninstall packages
+    apt:
+      name:
+      - docker
+      - docker-compose # On WSL you want the one that comes with docker or install it with pip.
+      - maven
+      - neovim # I install neovim from source now 
+      - vim
+      state: absent
+  - name: Global install npm editorconfig package.
+    npm:
+      name: editorconfig
+      global: yes
+  - name: Global install npm eclint package.
+    npm:
+      name: eclint
+      global: yes
+  - name: Global install npm neovim package.
+    npm:
+      name: neovim
+      global: yes
+  - name: Install Ruby bundler.
+    gem:
+      name: bundler
+      state: latest
+  - name: Install Ruby rake.
+    gem:
+      name: rake
+      state: latest
+  - name: Symlink /bin/sh to /bin/dash
+    file:
+      src: /bin/dash
+      dest: /bin/sh
+      state: link
+

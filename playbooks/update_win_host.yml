@@ -1,0 +1,58 @@
+#!ansible-playbook
+---
+- name: Update windows host.
+  hosts: windows
+  tasks:
+  - name: Install Windows updates
+    win_updates:
+  - name: Upgrade installed packages
+    win_chocolatey:
+      name: all
+      state: latest
+  - name: Install git
+    win_chocolatey:
+      name:
+       - 7zip
+       - 7zip.install
+       - Chocolatey
+       - GoogleChrome
+       - KB2919355
+       - KB2919442
+       - KB2999226
+       - KB3033929
+       - KB3035131
+       - KB3118401
+       - Wget
+       - WhatsApp
+       - androidstudio
+       - autohotkey
+       - autohotkey.install
+       - cascadia-code-nerd-font
+       - cascadiamono
+       - cascadiamonopl
+       - chocolateygui
+       - curl
+       - docker-desktop
+       - firacodenf
+       - firanf
+       - gimp
+       - git
+       - git.install
+       - inconsolata
+       - maven
+       - neovim
+       - openvpn
+       - postman
+       - python3
+       - sed
+       - signal
+       - vcredist140
+       - vcredist2015
+       - vcredist2017
+       - vscode
+       - vscode.install
+       - winmerge
+       - zoom
+       - zulu11
+       - zulu8
+      state: latest

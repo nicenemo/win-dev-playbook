@@ -1,0 +1,16 @@
+---
+- name: Mount for systemd.
+  hosts: wsl
+  become: true
+  vars_files:
+    ../vars/vars.yml
+  tasks:
+  - name: Create systemd directory
+    file:
+      path: /sys/fs/cgroup/systemd
+      state: directory
+      owner: root
+      group: root
+      mode: 0775
+  - name: 'Mount systemd directory for use with docker containers'
+    command: 'sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd'
