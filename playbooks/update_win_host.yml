@@ -1,4 +1,4 @@
-#!ansible-playbook
+#!/usr/bin/env ansible-playbook
 ---
 - name: Update windows host.
   hosts: windows

@@ -1,4 +1,4 @@
-#!ansible-playbook
+#!/usr/bin/env ansible-playbook
 ---
 - name: Configure windows development environment from WSL 2.
   hosts: wsl
