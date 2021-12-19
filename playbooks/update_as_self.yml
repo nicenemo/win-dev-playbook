@@ -27,6 +27,7 @@
       - neovim-remote
       - jmespath
       - docker-compose
+      - proxmoxer
       state: latest
 #  - name: Create ~/.cache/zsh directory
 #    file:
