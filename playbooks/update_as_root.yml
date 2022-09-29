@@ -156,10 +156,11 @@
       - man
       - mosquitto-clients
       - ncurses-doc 
-      - nodejs
       - net-tools
       - ninja-build
       - nmap
+      - nodejs
+      - npm
       - openjdk-11-jdk-headless
       - p7zip-full
       - pandoc
