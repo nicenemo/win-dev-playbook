@@ -17,10 +17,10 @@ For a Mac? See: [mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbo
 Don't!. No serious ;) First uninstall Ansible 2.9 or lower. Upgrading does not
 work.
 
-Install ansible 2.10 and higer  with:
+Install a recent version of Ansible with:
 
 ```shell
-pip install ansible-base
+pip install ansible-core
 pip install ansible
 ```
 There is no need to do this as root!
